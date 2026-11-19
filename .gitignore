@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Local development files
+.env
+.env.local
+.env.*.local
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Testing / Coverage
+coverage/
+.nyc_output/
+
+# Misc debug/test files in root (generated during development)
+*.json
+!package.json
+!package-lock.json
+
+# Root-level CSS (superseded by src/css/)
+index.css
+test.css
+
+# Root-level HTML test files
+test-multi-chart.html
+
+# Project planning docs (optional - uncomment to track)
+# phases.md
+# prd.md
+# rules.md

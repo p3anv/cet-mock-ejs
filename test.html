@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CET Mock Test – Take Test</title>
+  <link rel="stylesheet" href="/src/css/test.css">
+</head>
+<body x-data="testApp" x-cloak>
+
+<div x-show="test">
+  <div class="test-layout">
+    <div class="test-header">
+      <div class="test-title" x-text="test.name"></div>
+      <span class="test-id" x-text="'ID: ' + test.id.slice(-8)"></span>
+      <div class="header-controls">
+        <div class="timer"><span x-text="timerDisplay"></span></div>
+        <button class="theme-toggle-exam" @click="toggleTheme" aria-label="Toggle theme">
+          <svg class="icon" viewBox="0 0 24 24" x-html="themeIcon"></svg>
+        </button>
+        <button class="submit-btn" id="finalSubmitBtn" @click="submitTest">Submit test</button>
+      </div>
+    </div>
+
+    <div class="test-container">
+    <div class="question-nav">
+      <h4>Navigator</h4>
+      <div class="nav-grid" id="navGrid">
+        <template x-for="btn in navButtons" :key="btn.number">
+          <button class="nav-btn"
+                  :class="{ answered: btn.answered, marked: btn.marked, current: btn.current }"
+                  @click="goToQuestion(btn.number - 1)"
+                  x-text="btn.number"></button>
+        </template>
+      </div>
+      <div class="nav-legend">
+        <span class="nav-legend-item"><span class="dot answered"></span> Answered</span>
+        <span class="nav-legend-item"><span class="dot marked"></span> Marked</span>
+        <span class="nav-legend-item"><span class="dot current"></span> Current</span>
+      </div>
+    </div>
+    <div class="question-panel" id="mainPanel">
+      <div class="question-card">
+        <div class="paragraph-box" id="paragraphBox"></div>
+        <div class="question-text" x-text="test.questions[currentIndex].question"></div>
+        <div class="options-list" id="optionsList">
+          <template x-for="(opt, optIdx) in test.questions[currentIndex].options" :key="optIdx">
+            <div class="option-item" :data-opt-index="optIdx">
+              <input type="radio"
+                     name="questionOption"
+                     :value="optIdx"
+                     :id="'opt_' + optIdx"
+                     :checked="answers[currentIndex] === optIdx"
+                     @change="answers[currentIndex] = optIdx">
+              <label :for="'opt_' + optIdx" style="flex:1; cursor:pointer;" x-text="opt"></label>
+            </div>
+          </template>
+        </div>
+        <div class="action-buttons">
+          <button class="action-btn" id="prevBtn" @click="prevQuestion" :disabled="currentIndex === 0">Previous</button>
+          <button class="action-btn" id="nextBtn" @click="nextQuestion" :disabled="currentIndex === test.questions.length - 1">Next</button>
+          <button class="action-btn" id="markBtn" @click="toggleMark" x-text="markedForReview[currentIndex] ? 'Marked' : 'Mark for review'"></button>
+          <button class="action-btn" id="explainBtn" @click="showExplanation">Show explanation</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<template x-if="!test && testId">
+  <div class="error-state">
+    <div class="error-icon">
+      <svg class="icon icon-xl" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 8v4"/>
+        <path d="M12 16h.01"/>
+      </svg>
+    </div>
+    <h2>Test not found</h2>
+    <p>The test you're looking for doesn't exist or has been deleted.</p>
+    <a href="index.html" class="btn btn-primary">Go Home</a>
+  </div>
+</template>
+
+<template x-if="!test && !testId">
+  <div class="error-state">
+    <div class="error-icon">
+      <svg class="icon icon-xl" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 8v4"/>
+        <path d="M12 16h.01"/>
+      </svg>
+    </div>
+    <h2>No test ID provided</h2>
+    <p>Please select a test from the dashboard to begin.</p>
+    <a href="index.html" class="btn btn-primary">Go Home</a>
+  </div>
+</template>
+
+<script type="module" src="/src/js/test.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CETPrep — Smart Practice</title>
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/src/css/index.css">
+</head>
+<body x-data="app" x-cloak>
+
+<div class="app">
+
+    <!-- =========================================================
+         SIDEBAR
+         ========================================================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-mark">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M2 10l10-5 10 5-10 5-10-5Z"/>
+                    <path d="M6 12.5v4c3 2 9 2 12 0v-4"/>
+                    <path d="M22 10v6"/>
+                </svg>
+            </div>
+            <div class="brand-name">CETPrep</div>
+        </div>
+
+        <nav class="nav">
+            <a href="#" class="nav-item" :class="{ active: currentPage === 'dashboard' }" @click.prevent="goTo('dashboard')">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7"/>
+                    <rect x="14" y="3" width="7" height="7"/>
+                    <rect x="3" y="14" width="7" height="7"/>
+                    <rect x="14" y="14" width="7" height="7"/>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item" :class="{ active: currentPage === 'create' }" @click.prevent="goTo('create')">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/>
+                    <path d="M14 2v6h6"/>
+                    <path d="M12 18v-6"/>
+                    <path d="M9 15h6"/>
+                </svg>
+                <span>Create Test</span>
+            </a>
+            <a href="#" class="nav-item" :class="{ active: currentPage === 'tests' }" @click.prevent="goTo('tests')">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                    <path d="M4 6h16"/>
+                    <path d="M4 12h16"/>
+                    <path d="M4 18h16"/>
+                    <path d="M8 4v16"/>
+                </svg>
+                <span>My Tests</span>
+            </a>
+            <a href="#" class="nav-item" :class="{ active: currentPage === 'samples' }" @click.prevent="goTo('samples')">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/>
+                    <path d="M14 2v6h6"/>
+                    <path d="M8 13h8"/>
+                    <path d="M8 17h5"/>
+                    <path d="M8 9h8"/>
+                </svg>
+                <span>JSON Samples</span>
+            </a>
+            <a href="#" class="nav-item" :class="{ active: currentPage === 'import' }" @click.prevent="goTo('import')">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <span>Import Test</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <button class="theme-toggle" @click="toggleTheme" type="button">
+                <svg class="icon icon-sm" viewBox="0 0 24 24" x-html="themeIcon"></svg>
+                <span x-text="themeText"></span>
+            </button>
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================================
+         MAIN
+         ========================================================= -->
+
+    <main class="main">
+
+
+        <!-- =====================================================
+             DASHBOARD
+             ===================================================== -->
+
+        <section id="dashboard" class="page" x-show="currentPage === 'dashboard'" x-cloak>
+
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="hero-label">Smart exam preparation</div>
+                    <h1 class="hero-title">Build mock tests. Track progress. Improve.</h1>
+                    <p class="hero-description">
+                        Create custom tests from JSON, practice with embedded charts and tables, and review detailed explanations — all free.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" @click="goTo('create')">
+                            <svg class="icon icon-sm" viewBox="0 0 24 24">
+                                <path d="M5 12h14"/>
+                                <path d="m13 6 6 6-6 6"/>
+                            </svg>
+                            Create your first test
+                        </button>
+                        <button class="btn btn-secondary" @click="goTo('tests')">
+                            <svg class="icon icon-sm" viewBox="0 0 24 24">
+                                <path d="M4 5h16"/>
+                                <path d="M4 12h16"/>
+                                <path d="M4 19h16"/>
+                                <path d="M8 3v18"/>
+                            </svg>
+                            View my tests
+                        </button>
+                    </div>
+                </div>
+
+                <div class="hero-visual" aria-hidden="true">
+                    <!-- Hero visual: paper test booklet on desk, warm desk lamp light -->
+                    <img src="/hero-illustration.svg" alt="Paper test booklet on wooden desk with warm desk lamp light" class="hero-illustration" aria-hidden="true">
+                </div>
+            </div>
+
+
+            <!-- QUICK STATS -->
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg class="icon icon-sm" viewBox="0 0 24 24">
+                            <path d="M4 5h16"/>
+                            <path d="M4 12h16"/>
+                            <path d="M4 19h16"/>
+                            <path d="M8 3v18"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-value" x-text="statCategories"></div>
+                        <div class="stat-label">Categories</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg class="icon icon-sm" viewBox="0 0 24 24">
+                            <path d="M12 3v18"/>
+                            <path d="M7 8h10"/>
+                            <path d="M7 16h10"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-value" x-text="statTests"></div>
+                        <div class="stat-label">Tests created</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg class="icon icon-sm" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M12 7v5l3 2"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="stat-value" x-text="statAttempts"></div>
+                        <div class="stat-label">Attempts logged</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- FEATURES -->
+
+            <div class="section-heading">
+                <div>
+                    <div class="section-eyebrow">What you get</div>
+                    <h2 class="section-title">Built around how you actually study</h2>
+                </div>
+                <p class="section-description">
+                    Each tool maps to a real step in exam prep — no filler features.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/>
+                            <path d="M14 2v6h6"/>
+                            <path d="M8 13h8"/>
+                            <path d="M8 17h5"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Paste or upload JSON</h3>
+                    <p class="feature-description">Questions, paragraphs, explanations, and chart data in one file.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M4 19V5"/>
+                            <path d="M4 19h17"/>
+                            <path d="M7 16l4-5 3 3 5-7"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Charts in questions</h3>
+                    <p class="feature-description">Bar, line, pie charts and tables render inline from your JSON.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M4 6h16"/>
+                            <path d="M4 12h16"/>
+                            <path d="M4 18h16"/>
+                            <circle cx="8" cy="6" r="1.5"/>
+                            <circle cx="15" cy="12" r="1.5"/>
+                            <circle cx="10" cy="18" r="1.5"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Verbal, Logical, Quants, Misc</h3>
+                    <p class="feature-description">Standard categories with color badges, filterable in your library.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M8 7v10"/>
+                            <path d="M16 7v10"/>
+                            <path d="M4 12h16"/>
+                            <path d="M8 7l-3 3"/>
+                            <path d="M8 7l3 3"/>
+                            <path d="M16 17l-3-3"/>
+                            <path d="M16 17l3-3"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Retake any test</h3>
+                    <p class="feature-description">Each attempt opens in a new tab — sessions stay independent.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M4 19V5"/>
+                            <path d="M4 19h16"/>
+                            <path d="M8 16v-4"/>
+                            <path d="M12 16V8"/>
+                            <path d="M16 16v-7"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">History with explanations</h3>
+                    <p class="feature-description">Review past scores, best runs, and full answer explanations.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="4"/>
+                            <path d="M12 2v2"/>
+                            <path d="M12 20v2"/>
+                            <path d="m4.93 4.93 1.41 1.41"/>
+                            <path d="m17.66 17.66 1.41 1.41"/>
+                            <path d="M2 12h2"/>
+                            <path d="M20 12h2"/>
+                            <path d="m4.93 19.07 1.41-1.41"/>
+                            <path d="m17.66 6.34 1.41-1.41"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Dark and light mode</h3>
+                    <p class="feature-description">Comfortable testing in any lighting condition.</p>
+                </article>
+            </div>
+
+
+            <!-- CTA -->
+
+            <div class="cta">
+                <div class="cta-content">
+                    <div class="cta-icon">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12 3v18"/>
+                            <path d="M5 12h14"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="cta-eyebrow">Ready when you are</div>
+                        <h3 class="cta-title">Create a test in under a minute</h3>
+                        <p class="cta-description">Paste your questions, pick a category, and start practicing.</p>
+                    </div>
+                </div>
+                <div class="cta-actions">
+                    <button class="btn btn-primary" @click="goTo('create')">Create new test</button>
+                    <button class="btn btn-secondary" @click="goTo('tests')">View my tests</button>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CREATE TEST
+             ===================================================== -->
+
+        <section id="create" class="page" x-show="currentPage === 'create'" x-cloak>
+
+            <div class="empty-page-header">
+                <div class="eyebrow">Test builder</div>
+                <h1 class="page-title">Create test</h1>
+                <p class="page-description">Build a custom mock test using your question data.</p>
+            </div>
+
+            <div class="create-panel">
+                <div class="form-group">
+                    <label for="testNameInput">Test name</label>
+                    <input type="text" id="testNameInput" placeholder="e.g. Reading Comprehension Set" x-model="testName">
+                </div>
+                <div class="form-group">
+                    <label for="testCategory">Category</label>
+                    <select id="testCategory" x-model="testCategory">
+                        <option value="Verbal Ability">Verbal Ability</option>
+                        <option value="Logical Reasoning">Logical Reasoning</option>
+                        <option value="Quants">Quants</option>
+                        <option value="Misc">Misc</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="jsonInput">JSON format</label>
+                    <textarea id="jsonInput" rows="10" x-model="jsonInput" placeholder='[
+  {
+    "paragraph": "[BARGRAPH]\nSales Data\nA: 120\nB: 85\nC: 200",
+    "question": "Which product sold most?",
+    "options": ["A","B","C","D","E"],
+    "correct": 2,
+    "explanation": "C sold 200 units."
+  }
+]'></textarea>
+                    <span class="hint">Supports [BARGRAPH], [LINEGRAPH], [PIEGRAPH], [TABLE] in paragraph.</span>
+                </div>
+                <div class="form-group">
+                    <label>Or upload JSON file</label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="fileUpload" accept=".json" x-ref="fileUpload" @change="handleFileUpload">
+                        <span x-text="fileStatus"></span>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary" @click="generateTest">Create test</button>
+                    <button class="btn btn-secondary" @click="clearForm" type="button">Clear</button>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             MY TESTS
+             ===================================================== -->
+
+        <section id="tests" class="page" x-show="currentPage === 'tests'" x-cloak>
+
+            <div class="empty-page-header">
+                <div class="eyebrow">Your practice</div>
+                <h1 class="page-title">My tests</h1>
+                <p class="page-description">Review and continue your previous mock tests.</p>
+            </div>
+
+            <div id="testLibrary">
+                <div class="category-tabs">
+                    <template x-for="cat in categories" :key="cat">
+                        <button class="tab-btn"
+                                :class="{ active: activeTab === cat }"
+                                @click="setActiveTab(cat)"
+                                x-text="cat"></button>
+                    </template>
+                </div>
+
+                <template x-for="cat in categories" :key="cat">
+                    <div class="tab-content" :class="{ active: activeTab === cat }" :id="'tab-' + cat.replace(/\s/g, '')">
+                        <div class="search-wrapper">
+                            <input type="text" class="search-input"
+                                   :id="'search-' + cat.replace(/\s/g, '')"
+                                   :placeholder="'Search ' + cat + ' tests...'"
+                                   autocomplete="off"
+                                   x-model="searchTerms[cat]">
+                            <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                        </div>
+                        <div class="test-list" :id="'list-' + cat.replace(/\s/g, '')">
+                            <template x-if="getFilteredTests(cat).length === 0">
+                                <div class="empty-state-card">
+                                    <div class="empty-icon">
+                                        <svg class="icon" viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/><path d="M8 4v16"/></svg>
+                                    </div>
+                                    <h3 x-text="searchTerms[cat] ? 'No matching tests' : 'No tests in ' + cat"></h3>
+                                    <p x-text="searchTerms[cat] ? 'Try a different search term.' : 'Create your first test to get started.'"></p>
+                                    <template x-if="!searchTerms[cat]">
+                                        <button class="btn btn-primary" @click="goTo('create')">Create a test</button>
+                                    </template>
+                                </div>
+                            </template>
+                            <template x-if="getFilteredTests(cat).length > 0">
+                                <div class="test-grid">
+                                    <template x-for="test in getFilteredTests(cat)" :key="test.id">
+                                        <div class="test-card-item">
+                                            <div class="test-card-header">
+                                                <h3 class="test-name" x-text="test.name"></h3>
+                                                <span class="test-badge" :class="getCategoryBadge(test.category || 'Misc')" x-text="test.category || 'Misc'"></span>
+                                            </div>
+                                            <div class="test-stats">
+                                                <span x-text="test.questions.length + ' questions'"></span>
+                                                <template x-if="getAttemptCount(test.id) > 0">
+                                                    <span>Best: <strong class="stat-best" x-text="getBestPercentage(test.id) + '%'"></strong></span>
+                                                </template>
+                                                <span x-text="getAttemptCount(test.id) + ' attempt' + (getAttemptCount(test.id) !== 1 ? 's' : '')"></span>
+                                            </div>
+                                            <div class="test-actions">
+                                                <button class="btn btn-primary btn-sm attempt-btn" @click="attemptTest(test.id)">Attempt</button>
+                                                <button class="btn btn-secondary btn-sm history-btn" @click="viewHistory(test.id)">History</button>
+                                                <button class="btn btn-danger btn-sm delete-btn" @click="deleteTest(test.id)">Delete</button>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             JSON SAMPLES
+             ===================================================== -->
+
+        <section id="samples" class="page" x-show="currentPage === 'samples'" x-cloak>
+
+            <div class="empty-page-header">
+                <div class="eyebrow">Reference</div>
+                <h1 class="page-title">JSON Samples</h1>
+                <p class="page-description">Copy-ready examples for every supported question format.</p>
+            </div>
+
+            <div class="samples-grid">
+                <template x-for="sample in jsonSamples" :key="sample.id">
+                    <article class="sample-card">
+                        <div class="sample-header">
+                            <h3 class="sample-title" x-text="sample.title"></h3>
+                            <span class="sample-badge" x-text="sample.type"></span>
+                        </div>
+                        <p class="sample-description" x-text="sample.description"></p>
+                        <pre class="sample-code"><code x-text="sample.json"></code></pre>
+                        <div class="sample-actions">
+                            <button class="btn btn-secondary btn-sm" @click="copySample(sample.json)">Copy JSON</button>
+                            <button class="btn btn-primary btn-sm" @click="loadSample(sample.json)">Load in Builder</button>
+                        </div>
+                    </article>
+                </template>
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+             IMPORT TEST (Enterprise - Unslopped)
+             ===================================================== -->
+
+        <section id="import" class="page" x-show="currentPage === 'import'" x-cloak>
+
+            <div class="empty-page-header">
+                <div class="eyebrow">Import</div>
+                <h1 class="page-title">Import Tests</h1>
+                <p class="page-description">Browse and import tests from the mock-app-data repository.</p>
+            </div>
+
+            <div class="import-panel-enterprise">
+
+                <!-- Toolbar -->
+                <div class="import-toolbar">
+                    <div class="toolbar-left">
+                        <div class="repo-source">
+                            <svg class="icon icon-sm" viewBox="0 0 24 24">
+                                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.605-3.369-1.343-3.369-1.343-.454-1.157-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.987 1.029-2.688-.103-.253-.446-1.272.098-2.647 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.375.203 2.394.1 2.647.64.701 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .267.18.578.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10Z"/>
+                            </svg>
+                            <div>
+                                <div class="repo-name">p3anv/mock-app-data</div>
+                                <div class="repo-meta">
+                                    <span x-text="totalTestsCount + ' tests across ' + totalFoldersCount + ' folders'"></span>
+                                    <span class="divider">•</span>
+                                    <span x-show="lastSyncTime" x-text="'Last sync: ' + lastSyncTime"></span>
+                                    <span class="divider" x-show="lastSyncTime">•</span>
+                                    <span class="status-chip" :class="anyFolderLoaded ? 'loaded' : 'idle'" x-text="anyFolderLoaded ? 'Loaded' : 'Not loaded'"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="search-wrapper-global" x-show="anyFolderLoaded">
+                            <input type="text" class="search-input" placeholder="Search all tests..." x-model="globalSearchTerm">
+                            <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                        </div>
+                    </div>
+                    <div class="toolbar-right">
+                        <button class="btn btn-secondary" @click="refreshAllFolders" :disabled="isAnyFolderLoading">
+                            <svg class="icon icon-sm" viewBox="0 0 24 24">
+                                <path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                            </svg>
+                            <span>Refresh All</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Main Two-Pane Layout -->
+                <div class="import-main-layout">
+
+                    <!-- Left Pane: Folder Tree -->
+                    <aside class="folder-pane">
+                        <div class="folder-pane-header">
+                            <h3>Folders</h3>
+                            <span class="folder-count" x-text="testFolders.length"></span>
+                        </div>
+                        <ul class="folder-list">
+                            <template x-for="folder in testFolders" :key="folder.id">
+                                <li class="folder-item" :class="{ active: activeFolder === folder.id }" @click="setActiveFolder(folder.id)">
+                                    <div class="folder-item-main">
+                                        <span class="folder-dot" :class="folder.id"></span>
+                                        <div class="folder-item-info">
+                                            <span class="folder-item-label" x-text="folder.label"></span>
+                                            <span class="folder-item-meta">
+                                                <template x-if="folderTests[folder.id].loading">
+                                                    <span class="status-loading">Loading...</span>
+                                                </template>
+                                                <template x-if="!folderTests[folder.id].loading && folderTests[folder.id].loaded">
+                                                    <span class="status-loaded" x-text="folderTests[folder.id].tests.length + ' tests'"></span>
+                                                </template>
+                                                <template x-if="!folderTests[folder.id].loading && !folderTests[folder.id].loaded">
+                                                    <span class="status-idle">Not loaded</span>
+                                                </template>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="folder-item-actions">
+                                        <button class="icon-btn" @click.stop="loadFolderTests(folder.id)" :disabled="folderTests[folder.id].loading" :title="folderTests[folder.id].loaded ? 'Reload' : 'Load tests'">
+                                            <svg class="icon icon-sm" viewBox="0 0 24 24">
+                                                <path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                    </aside>
+
+                    <!-- Right Pane: Test Table -->
+                    <div class="table-pane">
+                        <div class="table-header" x-show="activeFolder && folderTests[activeFolder]?.loaded">
+                            <div class="table-header-left">
+                                <h3 x-text="getFolderLabel(activeFolder) + ' Tests'"></h3>
+                                <span class="table-count" x-text="getFilteredFolderTests(activeFolder).length + ' tests'"></span>
+                            </div>
+                            <div class="table-header-right">
+                                <div class="search-wrapper" x-show="getFilteredFolderTests(activeFolder).length > 5">
+                                    <input type="text" class="search-input" placeholder="Search in this folder..." :value="folderTests[activeFolder]?.searchTerm || ''" @input="folderTests[activeFolder] && (folderTests[activeFolder].searchTerm = $event.target.value)">
+                                    <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Loading state -->
+                        <div class="table-loading" x-show="activeFolder && folderTests[activeFolder]?.loading" x-transition>
+                            Loading tests...
+                        </div>
+
+                        <!-- Test Table -->
+                        <div class="table-container" x-show="activeFolder && folderTests[activeFolder]?.loaded && !folderTests[activeFolder]?.loading">
+                            <table class="test-table">
+                                <thead>
+                                    <tr>
+                                        <th width="40">
+                                            <label class="checkbox-wrapper">
+                                                <input type="checkbox" x-model="selectAllInFolder">
+                                            </label>
+                                        </th>
+                                        <th>Test Name</th>
+                                        <th width="80">Questions</th>
+                                        <th width="140">Folder</th>
+                                        <th width="100">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template x-for="test in getFilteredFolderTests(activeFolder)" :key="test.id">
+                                        <tr :class="{ selected: selectedTests.includes(test.id) }">
+                                            <td>
+                                                <label class="checkbox-wrapper">
+                                                    <input type="checkbox" :value="test.id" x-model="selectedTests">
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="test-name-cell">
+                                                    <span class="test-title" x-text="test.title"></span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="question-count" x-text="test.questions"></span>
+                                            </td>
+                                            <td>
+                                                <span class="folder-badge-table" :class="test.folder" x-text="test.folder.toUpperCase()"></span>
+                                            </td>
+                                            <td>
+                                                <div class="action-buttons-cell">
+                                                    <button class="btn btn-primary btn-sm" @click="importTest(test.id)">
+                                                        <svg class="icon icon-sm" viewBox="0 0 24 24">
+                                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                                            <polyline points="17 8 12 3 7 8"/>
+                                                            <line x1="12" y1="3" x2="12" y2="15"/>
+                                                        </svg>
+                                                        Import
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+
+                            <!-- Empty state -->
+                            <div class="table-empty" x-show="getFilteredFolderTests(activeFolder).length === 0" x-transition>
+                                <svg class="icon icon-xl" viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/><path d="M8 4v16"/></svg>
+                                <h4>No tests found</h4>
+                                <p x-text="folderTests[activeFolder]?.searchTerm ? 'Try a different search term.' : 'No JSON test files in this folder yet.'"></p>
+                            </div>
+                        </div>
+
+                        <!-- No folder selected -->
+                        <div class="table-placeholder" x-show="!activeFolder || !folderTests[activeFolder].loaded">
+                            <svg class="icon icon-xl" viewBox="0 0 24 24">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="17 8 12 3 7 8"/>
+                                <line x1="12" y1="3" x2="12" y2="15"/>
+                            </svg>
+                            <h4 x-text="!activeFolder ? 'Select a folder' : 'Click Load to fetch tests'"></h4>
+                            <p x-text="!activeFolder ? 'Choose a folder from the left to view its tests.' : 'Tests from ' + getFolderLabel(activeFolder) + ' will appear here.'"></p>
+                        </div>
+
+                        <!-- Bulk import bar -->
+                        <div class="bulk-import-bar" x-show="selectedTests.length > 0" x-transition>
+                            <span x-text="selectedTests.length + ' test' + (selectedTests.length > 1 ? 's' : '') + ' selected'"></span>
+                            <button class="btn btn-primary" @click="importSelectedTests">
+                                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="17 8 12 3 7 8"/>
+                                    <line x1="12" y1="3" x2="12" y2="15"/>
+                                </svg>
+                                Import Selected
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Import result modals (shared) -->
+            <div class="import-status" x-show="importLoading" x-transition>
+                <div class="spinner"></div>
+                <span x-text="importMessage"></span>
+            </div>
+
+            <div class="import-result" x-show="importSuccess" x-transition>
+                <div class="result-icon success">
+                    <svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div class="result-text">
+                    <div class="result-title" x-text="'Imported: ' + importedTestName"></div>
+                    <div class="result-subtitle">Test saved and ready to practice.</div>
+                </div>
+                <div class="result-actions">
+                    <button class="btn btn-primary btn-sm" @click="goTo('tests')">View in My Tests</button>
+                    <button class="btn btn-secondary btn-sm" @click="goTo('create')">Edit Test</button>
+                </div>
+            </div>
+
+            <div class="import-result" x-show="importError" x-transition>
+                <div class="result-icon error">
+                    <svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </div>
+                <div class="result-text">
+                    <div class="result-title">Import failed</div>
+                    <div class="result-subtitle" x-text="importErrorMessage"></div>
+                </div>
+                <button class="btn btn-secondary btn-sm" @click="importError = false">Dismiss</button>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- Toast Container (Alpine component) -->
+<div x-data="toast" x-cloak>
+    <div class="toast-container" x-show="show" x-transition>
+        <div class="toast" :class="type">
+            <div class="toast-icon" x-text="type === 'success' ? '✓' : (type === 'error' ? '✕' : (type === 'info' ? 'i' : '!'))"></div>
+            <div class="toast-content">
+                <div class="toast-title" x-text="title"></div>
+                <div class="toast-message" x-text="message"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="/src/js/main.js"></script>
+
+</body>
+</html>
