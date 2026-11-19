@@ -1487,7 +1487,7 @@ body.light .option-item:hover {
     padding: 11px 12px;
 
     border: 1px solid var(--color-border);
-    border-radius: 8px.
+    border-radius: 8px;
 
     color: var(--color-text-secondary);
     background: var(--color-surface-soft);
@@ -1528,59 +1528,59 @@ body.light .option-item:hover {
    ========================================================= */
 
 .data-table {
-    width: 100%.
+    width: 100%;
 
-    border-collapse: separate.
-    border-spacing: 0.
+    border-collapse: separate;
+    border-spacing: 0;
 
-    overflow: hidden.
+    overflow: hidden;
 
-    border: 1px solid var(--color-border).
-    border-radius: 10px.
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
 
-    background: var(--color-surface).
+    background: var(--color-surface);
 
-    color: var(--color-text).
+    color: var(--color-text);
 
-    font-size: 12px.
+    font-size: 12px;
 }
 
 .data-table caption {
-    color: var(--color-text).
-    font-size: 13px.
-    font-weight: 500.
-    text-align: left.
+    color: var(--color-text);
+    font-size: 13px;
+    font-weight: 500;
+    text-align: left;
 }
 
 .data-table th,
 .data-table td {
-    padding: 10px 12px.
+    padding: 10px 12px;
 
-    text-align: left.
+    text-align: left;
 
-    border-bottom: 1px solid var(--color-border).
+    border-bottom: 1px solid var(--color-border);
 }
 
 .data-table th {
-    color: var(--color-text-secondary).
-    background: var(--color-surface-soft).
+    color: var(--color-text-secondary);
+    background: var(--color-surface-soft);
 
-    font-size: 10px.
-    font-weight: 600.
-    text-transform: uppercase.
-    letter-spacing: 0.04em.
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 .data-table tr:last-child td {
-    border-bottom: 0.
+    border-bottom: 0;
 }
 
 .data-table tbody tr {
-    transition: background var(--transition-fast).
+    transition: background var(--transition-fast);
 }
 
 .data-table tbody tr:hover {
-    background: var(--color-accent-soft).
+    background: var(--color-accent-soft);
 }
 
 /* =========================================================
@@ -1588,28 +1588,28 @@ body.light .option-item:hover {
    ========================================================= */
 
 * {
-    scrollbar-width: thin.
+    scrollbar-width: thin;
     scrollbar-color:
         var(--color-border-strong)
-        transparent.
+        transparent;
 }
 
 *::-webkit-scrollbar {
-    width: 6px.
-    height: 6px.
+    width: 6px;
+    height: 6px;
 }
 
 *::-webkit-scrollbar-track {
-    background: transparent.
+    background: transparent;
 }
 
 *::-webkit-scrollbar-thumb {
-    border-radius: 99px.
-    background: var(--color-border-strong).
+    border-radius: 99px;
+    background: var(--color-border-strong);
 }
 
 *::-webkit-scrollbar-thumb:hover {
-    background: var(--color-text-muted).
+    background: var(--color-text-muted);
 }
 
 /* =========================================================
@@ -1619,52 +1619,52 @@ body.light .option-item:hover {
 @media (max-width: 1050px) {
 
     .test-header {
-        padding: 9px 16px.
+        padding: 9px 16px;
     }
 
     .header-controls {
-        gap: 8px.
+        gap: 8px;
     }
 
     .test-container {
-        width: min(100% - 24px, 960px).
+        width: min(100% - 24px, 960px);
 
-        grid-template-columns: 180px minmax(0, 1fr).
-        gap: 14px.
+        grid-template-columns: 180px minmax(0, 1fr);
+        gap: 14px;
     }
 
     .question-nav {
-        padding: 14px.
+        padding: 14px;
     }
 
     .nav-grid {
-        grid-template-columns: repeat(4, 1fr).
+        grid-template-columns: repeat(4, 1fr);
     }
 
     .question-card {
-        padding: 24px.
+        padding: 24px;
     }
 
     .action-buttons {
-        gap: 6px.
+        gap: 6px;
     }
 
     .action-btn {
-        padding: 0 11px.
+        padding: 0 11px;
     }
 
     .score-summary {
-        gap: 8px.
+        gap: 8px;
     }
 
     .score-card {
-        min-height: 85px.
-        padding: 13px.
+        min-height: 85px;
+        padding: 13px;
     }
 
     canvas {
-        max-width: 100%.
-        height: auto.
+        max-width: 100%;
+        height: auto;
     }
 }
 
@@ -1675,297 +1675,297 @@ body.light .option-item:hover {
 @media (max-width: 760px) {
 
     :root {
-        --header-height: auto.
+        --header-height: auto;
     }
 
     body {
-        background: var(--color-bg).
+        background: var(--color-bg);
     }
 
     #testApp {
-        padding-bottom: 20px.
+        padding-bottom: 20px;
     }
 
     /* Header becomes stacked layout */
     .test-header {
-        position: relative.
-        padding: 10px.
-        display: flex.
-        flex-direction: column.
-        gap: 8px.
+        position: relative;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
     }
 
     .test-title {
-        font-size: 14px.
-        font-weight: 500.
+        font-size: 14px;
+        font-weight: 500;
     }
 
     .test-id {
-        display: none.
+        display: none;
     }
 
     .header-controls {
-        display: flex.
-        align-items: center.
-        justify-content: space-between.
-        gap: 6px.
-        flex-wrap: wrap.
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+        flex-wrap: wrap;
     }
 
     .timer {
-        min-height: 40px.
-        padding: 0 12px.
-        font-size: 14px.
-        font-weight: 500.
-        background: var(--color-accent-soft).
-        color: var(--color-accent).
-        border-radius: var(--radius-md).
-        display: flex.
-        align-items: center.
-        flex: 1.
-        justify-content: center.
-        min-width: 90px.
+        min-height: 40px;
+        padding: 0 12px;
+        font-size: 14px;
+        font-weight: 500;
+        background: var(--color-accent-soft);
+        color: var(--color-accent);
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        flex: 1;
+        justify-content: center;
+        min-width: 90px;
     }
 
     .theme-toggle-exam {
-        width: 40px.
-        height: 40px.
-        border-radius: var(--radius-md).
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-md);
     }
 
     .submit-btn {
-        min-height: 40px.
-        padding: 0 14px.
-        font-size: 12px.
-        font-weight: 500.
-        flex: 1.
-        min-width: 90px.
+        min-height: 40px;
+        padding: 0 14px;
+        font-size: 12px;
+        font-weight: 500;
+        flex: 1;
+        min-width: 90px;
     }
 
     /* Single column */
     .test-container {
-        width: calc(100% - 12px).
-        margin: 6px auto.
-        display: flex.
-        flex-direction: column.
-        gap: 8px.
+        width: calc(100% - 12px);
+        margin: 6px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
     }
 
     /* Navigator as collapsible horizontal scroller */
     .question-nav {
-        position: relative.
-        top: auto.
-        width: 100%.
-        padding: 10px.
-        border-radius: 12px.
+        position: relative;
+        top: auto;
+        width: 100%;
+        padding: 10px;
+        border-radius: 12px;
     }
 
     .question-nav::before {
-        margin-bottom: 6px.
+        margin-bottom: 6px;
     }
 
     .question-nav h4 {
-        margin-bottom: 6px.
-        font-size: 12px.
-        font-weight: 500.
+        margin-bottom: 6px;
+        font-size: 12px;
+        font-weight: 500;
     }
 
     .nav-grid {
-        display: flex.
-        max-height: none.
-        overflow-x: auto.
-        overflow-y: hidden.
-        padding-bottom: 4px.
-        gap: 5px.
-        -webkit-overflow-scrolling: touch.
+        display: flex;
+        max-height: none;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 4px;
+        gap: 5px;
+        -webkit-overflow-scrolling: touch;
     }
 
     .nav-btn {
-        width: 36px.
-        min-width: 36px.
-        height: 36px.
-        font-size: 11px.
-        border-radius: 6px.
+        width: 36px;
+        min-width: 36px;
+        height: 36px;
+        font-size: 11px;
+        border-radius: 6px;
     }
 
     .nav-btn.current {
-        box-shadow: 0 0 0 2px var(--color-accent).
+        box-shadow: 0 0 0 2px var(--color-accent);
     }
 
     .nav-legend {
-        display: flex.
-        flex-wrap: wrap.
-        gap: 10px 14px.
-        margin-top: 8px.
-        padding-top: 6px.
-        border-top: 1px solid var(--color-border).
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 14px;
+        margin-top: 8px;
+        padding-top: 6px;
+        border-top: 1px solid var(--color-border);
     }
 
     .nav-legend-item {
-        font-size: 10px.
-        display: flex.
-        align-items: center.
-        gap: 4px.
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
     }
 
     .nav-legend-item .dot {
-        width: 7px.
-        height: 7px.
+        width: 7px;
+        height: 7px;
     }
 
     /* Question Card - comfortable touch targets */
     .question-card {
-        min-height: auto.
-        padding: 16px 12px.
-        border-radius: 14px.
+        min-height: auto;
+        padding: 16px 12px;
+        border-radius: 14px;
     }
 
     .paragraph-box {
-        padding: 12px.
-        margin-bottom: 16px.
-        border-radius: var(--radius-md).
-        font-size: 12px.
-        line-height: 1.5.
+        padding: 12px;
+        margin-bottom: 16px;
+        border-radius: var(--radius-md);
+        font-size: 12px;
+        line-height: 1.5;
     }
 
     .question-text {
-        margin-bottom: 16px.
-        font-size: 1.05rem.
-        line-height: 1.6.
+        margin-bottom: 16px;
+        font-size: 1.05rem;
+        line-height: 1.6;
     }
 
     .options-list {
-        gap: 6px.
+        gap: 6px;
     }
 
     .option-item {
-        min-height: 52px.
-        padding: 12px 12px.
-        border-radius: 10px.
+        min-height: 52px;
+        padding: 12px 12px;
+        border-radius: 10px;
     }
 
     .option-item label {
-        font-size: 13px.
-        line-height: 1.4.
+        font-size: 13px;
+        line-height: 1.4;
     }
 
     .option-item input[type="radio"] {
-        width: 18px.
-        height: 18px.
-        accent-color: var(--color-accent).
+        width: 18px;
+        height: 18px;
+        accent-color: var(--color-accent);
     }
 
     /* Action Buttons - 2x2 grid on mobile */
     .action-buttons {
-        margin-top: 16px.
-        padding-top: 14px.
-        display: grid.
-        grid-template-columns: 1fr 1fr.
-        gap: 8px.
+        margin-top: 16px;
+        padding-top: 14px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
     }
 
     .action-btn {
-        min-height: 44px.
-        padding: 0 14px.
-        font-size: 12px.
-        font-weight: 500.
-        border-radius: var(--radius-md).
-        display: flex.
-        align-items: center.
-        justify-content: center.
-        gap: 5px.
+        min-height: 44px;
+        padding: 0 14px;
+        font-size: 12px;
+        font-weight: 500;
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
     }
 
     #prevBtn {
-        margin-right: 0.
-        grid-column: 1.
+        margin-right: 0;
+        grid-column: 1;
     }
 
     #nextBtn {
-        grid-column: 2.
+        grid-column: 2;
     }
 
     #markBtn {
-        grid-column: 1.
+        grid-column: 1;
     }
 
     #explainBtn {
-        grid-column: 2.
+        grid-column: 2;
     }
 
     /* Results Modal - full screen on mobile */
     .results-modal {
-        padding: 0.
-        display: flex.
-        align-items: flex-end.
-        min-height: 100vh.
+        padding: 0;
+        display: flex;
+        align-items: flex-end;
+        min-height: 100vh;
     }
 
     .results-card {
-        border-radius: 18px 18px 0 0.
-        width: 100%.
-        max-height: 90vh.
-        display: flex.
-        flex-direction: column.
-        overflow: hidden.
+        border-radius: 18px 18px 0 0;
+        width: 100%;
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
     }
 
     .results-header {
-        padding: 16px 14px.
-        flex-shrink: 0.
+        padding: 16px 14px;
+        flex-shrink: 0;
     }
 
     .results-header h2 {
-        font-size: 1.1rem.
+        font-size: 1.1rem;
     }
 
     .score-summary {
-        padding: 12px 14px.
-        gap: 6px.
-        flex-wrap: wrap.
+        padding: 12px 14px;
+        gap: 6px;
+        flex-wrap: wrap;
     }
 
     .score-card {
-        min-height: 75px.
-        padding: 10px 8px.
-        flex: 1 1 30%.
-        min-width: 75px.
+        min-height: 75px;
+        padding: 10px 8px;
+        flex: 1 1 30%;
+        min-width: 75px;
     }
 
     .score-value {
-        font-size: 1.15rem.
+        font-size: 1.15rem;
     }
 
     .score-label {
-        font-size: 10px.
+        font-size: 10px;
     }
 
     .results-content {
-        max-height: calc(90vh - 180px).
-        padding: 10px 14px.
-        overflow-y: auto.
-        flex: 1.
+        max-height: calc(90vh - 180px);
+        padding: 10px 14px;
+        overflow-y: auto;
+        flex: 1;
     }
 
     .question-review-item {
-        padding: 12px.
-        margin-bottom: 10px.
-        border-radius: 10px.
+        padding: 12px;
+        margin-bottom: 10px;
+        border-radius: 10px;
     }
 
     .question-review-item .q-text {
-        font-size: 13px.
-        margin-bottom: 8px.
+        font-size: 13px;
+        margin-bottom: 8px;
     }
 
     .question-review-item .answer-detail {
-        font-size: 11px.
-        margin-bottom: 3px.
+        font-size: 11px;
+        margin-bottom: 3px;
     }
 
     .question-review-item .explanation-box {
-        font-size: 11px.
-        line-height: 1.5.
+        font-size: 11px;
+        line-height: 1.5;
     }
 
     .results-footer {
@@ -1984,21 +1984,21 @@ body.light .option-item:hover {
     }
 
     .modal-box {
-        padding: 18px 14px.
-        margin: 14px.
-        max-height: 80vh.
-        overflow-y: auto.
+        padding: 18px 14px;
+        margin: 14px;
+        max-height: 80vh;
+        overflow-y: auto;
     }
 
     /* Canvas responsive */
     canvas {
-        max-width: 100%.
-        height: auto !important.
+        max-width: 100%;
+        height: auto !important;
     }
 
     .chart-container canvas {
-        width: 100% !important.
-        height: auto !important.
+        width: 100% !important;
+        height: auto !important;
     }
 }
 
@@ -2009,134 +2009,134 @@ body.light .option-item:hover {
 @media (max-width: 420px) {
 
     .test-header {
-        padding: 8px.
+        padding: 8px;
     }
 
     .test-title {
-        font-size: 13px.
+        font-size: 13px;
     }
 
     .header-controls {
-        gap: 5px.
+        gap: 5px;
     }
 
     .timer {
-        min-height: 36px.
-        padding: 0 8px.
-        font-size: 12px.
+        min-height: 36px;
+        padding: 0 8px;
+        font-size: 12px;
     }
 
     .theme-toggle-exam {
-        width: 36px.
-        height: 36px.
+        width: 36px;
+        height: 36px;
     }
 
     .submit-btn {
-        min-height: 36px.
-        padding: 0 10px.
-        font-size: 11px.
+        min-height: 36px;
+        padding: 0 10px;
+        font-size: 11px;
     }
 
     .test-container {
-        width: calc(100% - 8px).
-        gap: 6px.
+        width: calc(100% - 8px);
+        gap: 6px;
     }
 
     .question-nav {
-        padding: 8px.
+        padding: 8px;
     }
 
     .question-nav h4 {
-        font-size: 11px.
+        font-size: 11px;
     }
 
     .nav-btn {
-        width: 32px.
-        min-width: 32px.
-        height: 32px.
-        font-size: 10px.
+        width: 32px;
+        min-width: 32px;
+        height: 32px;
+        font-size: 10px;
     }
 
     .nav-legend-item {
-        font-size: 9px.
+        font-size: 9px;
     }
 
     .question-card {
-        padding: 14px 10px.
+        padding: 14px 10px;
     }
 
     .paragraph-box {
-        padding: 10px.
-        font-size: 11px.
+        padding: 10px;
+        font-size: 11px;
     }
 
     .question-text {
-        font-size: 1rem.
+        font-size: 1rem;
     }
 
     .option-item {
-        min-height: 48px.
-        padding: 10px 10px.
+        min-height: 48px;
+        padding: 10px 10px;
     }
 
     .option-item label {
-        font-size: 12px.
+        font-size: 12px;
     }
 
     .action-buttons {
-        gap: 6px.
-        grid-template-columns: 1fr.
+        gap: 6px;
+        grid-template-columns: 1fr;
     }
 
     .action-btn {
-        min-height: 40px.
-        font-size: 11px.
-        padding: 0 8px.
+        min-height: 40px;
+        font-size: 11px;
+        padding: 0 8px;
     }
 
     #prevBtn, #nextBtn, #markBtn, #explainBtn {
-        grid-column: auto.
+        grid-column: auto;
     }
 
     .score-summary {
-        gap: 5px.
+        gap: 5px;
     }
 
     .score-card {
-        min-height: 65px.
-        padding: 8px 5px.
+        min-height: 65px;
+        padding: 8px 5px;
     }
 
     .score-value {
-        font-size: 1rem.
+        font-size: 1rem;
     }
 
     .results-header {
-        padding: 14px 12px.
+        padding: 14px 12px;
     }
 
     .results-header h2 {
-        font-size: 1rem.
+        font-size: 1rem;
     }
 
     .results-content {
-        padding: 8px 12px.
+        padding: 8px 12px;
     }
 
     .question-review-item {
-        padding: 10px.
+        padding: 10px;
     }
 
     .question-review-item .q-text {
-        font-size: 12px.
+        font-size: 12px;
     }
 
     .question-review-item .answer-detail {
-        font-size: 10px.
+        font-size: 10px;
     }
 
     .question-review-item .explanation-box {
-        font-size: 10px.
+        font-size: 10px;
     }
 
     .results-footer {
@@ -2155,8 +2155,8 @@ body.light .option-item:hover {
     }
 
     .modal-box {
-        padding: 16px 12px.
-        margin: 10px.
+        padding: 16px 12px;
+        margin: 10px;
     }
 }
 
@@ -2169,10 +2169,10 @@ body.light .option-item:hover {
     *,
     *::before,
     *::after {
-        scroll-behavior: auto !important.
-        animation-duration: 0.01ms !important.
-        animation-iteration-count: 1 !important.
-        transition-duration: 0.01ms !important.
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
 
@@ -2189,23 +2189,23 @@ body.light .option-item:hover {
     .explanation-toast-container,
     .modal-overlay,
     .results-modal {
-        display: none !important.
+        display: none !important;
     }
 
     body {
-        background: #fff !important.
-        color: #000 !important.
+        background: #fff !important;
+        color: #000 !important;
     }
 
     .test-container {
-        width: 100%.
-        margin: 0.
-        display: block.
+        width: 100%;
+        margin: 0;
+        display: block;
     }
 
     .question-card {
-        border: 0.
-        box-shadow: none.
-        padding: 0.
+        border: 0;
+        box-shadow: none;
+        padding: 0;
     }
 }
