@@ -37,13 +37,10 @@ coverage/
 !package-lock.json
 
 # Root-level CSS (superseded by src/css/)
-index.css
-test.css
-
 # Root-level HTML test files
 test-multi-chart.html
 
 # Project planning docs (optional - uncomment to track)
-# phases.md
-# prd.md
-# rules.md
+phases.md
+prd.md
+rules.md
