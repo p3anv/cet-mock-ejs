@@ -78,6 +78,8 @@ export function renderBarGraph(canvasId, title, data) {
 
     destroyChart(canvasId);
 
+    canvas.className = 'chart-canvas chart-bar';
+    canvas.setAttribute('data-count', Object.keys(data).length);
     const colors = getChartColors();
     const labels = Object.keys(data);
     const values = Object.values(data);
@@ -131,6 +133,8 @@ export function renderLineGraph(canvasId, title, data) {
 
     destroyChart(canvasId);
 
+    canvas.className = 'chart-canvas chart-line';
+    canvas.setAttribute('data-count', Object.keys(data).length);
     const colors = getChartColors();
     const labels = Object.keys(data);
     const values = Object.values(data);
@@ -188,6 +192,8 @@ export function renderPieChart(canvasId, title, data) {
 
     destroyChart(canvasId);
 
+    canvas.className = 'chart-canvas chart-pie';
+    canvas.setAttribute('data-count', Object.keys(data).length);
     const colors = getChartColors();
     const labels = Object.keys(data);
     const values = Object.values(data);

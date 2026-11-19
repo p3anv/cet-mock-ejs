@@ -680,19 +680,80 @@ body.light .test-header {
 
 .chart-container {
     width: 100%;
-    min-height: 100px;
+    min-height: 240px;
 
     margin-top: 12px;
-    padding: 12px;
+    padding: 16px;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
     border: 1px solid var(--color-border);
-    border-radius: 10px;
+    border-radius: 12px;
 
     background: var(--color-surface);
+}
+
+/* Bar and line charts - larger for more data points */
+.chart-container:has(.chart-bar),
+.chart-container:has(.chart-line) {
+    min-height: 320px;
+}
+
+.chart-bar,
+.chart-line {
+    min-height: 300px;
+    max-height: 500px;
+}
+
+/* Scale based on data count (set via inline style in JS) */
+.chart-bar[data-count="1"],
+.chart-bar[data-count="2"],
+.chart-bar[data-count="3"] {
+    min-height: 200px;
+}
+.chart-bar[data-count="4"],
+.chart-bar[data-count="5"],
+.chart-bar[data-count="6"] {
+    min-height: 260px;
+}
+.chart-bar[data-count="7"],
+.chart-bar[data-count="8"],
+.chart-bar[data-count="9"],
+.chart-bar[data-count="10"],
+.chart-bar[data-count="11"],
+.chart-bar[data-count="12"] {
+    min-height: 340px;
+}
+
+/* Line charts similar scaling */
+.chart-line[data-count="1"],
+.chart-line[data-count="2"],
+.chart-line[data-count="3"],
+.chart-line[data-count="4"],
+.chart-line[data-count="5"],
+.chart-line[data-count="6"] {
+    min-height: 220px;
+}
+.chart-line[data-count="7"],
+.chart-line[data-count="8"],
+.chart-line[data-count="9"],
+.chart-line[data-count="10"],
+.chart-line[data-count="11"],
+.chart-line[data-count="12"] {
+    min-height: 300px;
+}
+
+/* Pie charts - smaller, fixed-ish size */
+.chart-container:has(.chart-pie) {
+    min-height: 220px;
+}
+
+.chart-pie {
+    min-height: 200px;
+    max-height: 300px;
+    max-width: 300px;
 }
 
 .chart-container canvas {
