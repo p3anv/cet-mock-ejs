@@ -335,6 +335,44 @@ body.light .test-header {
 }
 
 /* =========================================================
+   07b. SHORTCUTS BUTTON
+   ========================================================= */
+
+.shortcuts-btn {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    color: var(--color-text-secondary);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition:
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+.shortcuts-btn:hover {
+    color: var(--color-accent);
+    background: var(--color-accent-soft);
+    border-color: var(--color-accent);
+    transform: translateY(-1px);
+}
+
+.shortcuts-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.shortcuts-btn .icon {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.5;
+}
+
+/* =========================================================
    08. SUBMIT BUTTON
    ========================================================= */
 
@@ -1235,6 +1273,56 @@ body.light .option-item:hover {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
+}
+
+/* =========================================================
+   23b. SHORTCUTS MODAL
+   ========================================================= */
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.modal-close {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    color: var(--color-text-muted);
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.modal-close:hover {
+    color: var(--color-text);
+    background: var(--color-surface-hover);
+}
+
+.modal-body {
+    color: var(--color-text-secondary);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.shortcuts-modal .modal-box {
+    max-width: 380px;
 }
 
 /* =========================================================
@@ -2219,6 +2307,28 @@ body.light .option-item:hover {
         padding: 16px 12px;
         margin: 10px;
     }
+}
+
+/* =========================================================
+   34b. KBD STYLING (for shortcuts help)
+   ========================================================= */
+
+kbd {
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.8em;
+    font-weight: 500;
+    color: var(--color-accent);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+body.light kbd {
+    background: var(--color-surface-2);
+    border-color: var(--color-border);
+    box-shadow: 0 1px 2px rgba(31, 27, 22, 0.08);
 }
 
 /* =========================================================

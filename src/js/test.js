@@ -21,6 +21,7 @@ Alpine.data('testApp', () => ({
     timeSeconds: 0,
     submitted: false,
     cleanupFns: [],
+    keyHandler: null,
 
     init() {
         const params = new URLSearchParams(window.location.search);
@@ -42,6 +43,7 @@ Alpine.data('testApp', () => ({
 
         this.enableBeforeUnload();
         this.startTimer();
+        this.setupKeyboardShortcuts();
 
         this.$watch('currentIndex', () => {
             this.$nextTick(() => this.renderVisualizations());
@@ -62,6 +64,140 @@ Alpine.data('testApp', () => ({
             ? '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m4.93 19.07 1.41-1.41"/><path d="m17.66 6.34 1.41-1.41"/>'
             : '<path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.5 6.5 0 0 0 21 12.8Z"/>';
         this.themeIcon = themeIcon;
+    },
+
+    setupKeyboardShortcuts() {
+        this.keyHandler = (e) => {
+            // Ignore if typing in input/textarea/select
+            const tag = e.target.tagName.toLowerCase();
+            if (['input', 'textarea', 'select'].includes(tag)) return;
+            // Ignore if modifier keys held (except Shift for ?)
+            if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+            const totalQuestions = this.test?.questions?.length || 0;
+            const currentQuestion = this.test?.questions?.[this.currentIndex];
+            const optionCount = currentQuestion?.options?.length || 0;
+
+            switch (e.key) {
+                // Navigation
+                case 'ArrowRight':
+                case 'l':
+                case 'j':
+                    e.preventDefault();
+                    this.nextQuestion();
+                    break;
+                case 'ArrowLeft':
+                case 'h':
+                case 'k':
+                    e.preventDefault();
+                    this.prevQuestion();
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    this.goToQuestion(0);
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    this.goToQuestion(totalQuestions - 1);
+                    break;
+
+                // Answer selection (1-9)
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9': {
+                    const idx = parseInt(e.key, 10) - 1;
+                    if (idx >= 0 && idx < optionCount) {
+                        e.preventDefault();
+                        this.answers[this.currentIndex] = idx;
+                    }
+                    break;
+                }
+
+                // Actions
+                case 'm':
+                case 'M':
+                    e.preventDefault();
+                    this.toggleMark();
+                    break;
+                case 'e':
+                case 'E':
+                    e.preventDefault();
+                    this.showExplanation();
+                    break;
+                case 's':
+                case 'S':
+                    e.preventDefault();
+                    this.submitTest();
+                    break;
+                case 't':
+                case 'T':
+                    e.preventDefault();
+                    this.toggleTheme();
+                    break;
+                case '?':
+                    e.preventDefault();
+                    this.showShortcutsHelp();
+                    break;
+            }
+        };
+        document.addEventListener('keydown', this.keyHandler);
+        this.cleanupFns.push(() => document.removeEventListener('keydown', this.keyHandler));
+    },
+
+    showShortcutsHelp() {
+        const help = `
+            <div style="font-size:0.85rem; line-height:1.8; max-width:320px;">
+                <strong>Keyboard Shortcuts</strong><br>
+                <span style="color:var(--color-text-muted)">Navigation</span><br>
+                <kbd>←</kbd> / <kbd>h</kbd> / <kbd>k</kbd> — Previous question<br>
+                <kbd>→</kbd> / <kbd>l</kbd> / <kbd>j</kbd> — Next question<br>
+                <kbd>Home</kbd> — First question<br>
+                <kbd>End</kbd> — Last question<br>
+                <br>
+                <span style="color:var(--color-text-muted)">Answers</span><br>
+                <kbd>1</kbd>–<kbd>9</kbd> — Select option<br>
+                <br>
+                <span style="color:var(--color-text-muted)">Actions</span><br>
+                <kbd>m</kbd> — Mark/unmark for review<br>
+                <kbd>e</kbd> — Show explanation<br>
+                <kbd>s</kbd> — Submit test<br>
+                <kbd>t</kbd> — Toggle theme<br>
+                <kbd>?</kbd> — Show this help
+            </div>
+        `;
+        const modal = document.createElement('div');
+        modal.className = 'modal-overlay shortcuts-modal';
+        modal.innerHTML = `
+            <div class="modal-box" style="max-width:360px;">
+                <div class="modal-header">
+                    <h3>Keyboard Shortcuts</h3>
+                    <button class="modal-close" id="closeShortcutsBtn" aria-label="Close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    ${help}
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        const closeModal = () => {
+            modal.remove();
+            document.removeEventListener('keydown', escHandler);
+        };
+        const escHandler = (e) => {
+            if (e.key === 'Escape') closeModal();
+        };
+        document.addEventListener('keydown', escHandler);
+        document.getElementById('closeShortcutsBtn')?.addEventListener('click', closeModal);
+        modal.querySelector('.modal-overlay')?.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
     },
 
     get timerDisplay() {
